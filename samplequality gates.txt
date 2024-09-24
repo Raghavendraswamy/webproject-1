@@ -15,7 +15,7 @@ pipeline {
                 echo 'Running tests...'
                 // Simulated test command
                 script {
-                    def testResult = sh(script: 'run_tests.sh', return Status: true)
+                    def testResult = sh './result.sh'
                     if (testResult != 0) {
                         error 'Tests failed. Please fix the issues.'
                     } else {
@@ -49,14 +49,12 @@ pipeline {
     }
 
     post {
-        success {
-            echo 'Pipeline completed successfully! 
+        success { 
+            echo 'success'
         }
         failure {
-            echo 'Pipeline failed. Please check the logs.'
+            echo 'fail'
         }
-        always {
-            echo 'Cleaning up resources...'
-        }
+       
     }
 }
