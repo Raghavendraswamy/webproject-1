@@ -1,0 +1,27 @@
+pipeline {
+    agent any 
+
+    stages {
+        stage('Execute Shell Script') {
+            steps {
+                script {
+                    // Execute the shell script and capture the output
+                    def result = sh(script: './your-script.sh', returnStdout: true).trim()
+                    
+                    // Print the result for debugging
+                    echo "Script output: ${result}"
+
+                    // Compare the result
+                    if (result == 'expected_value') {
+                        echo 'The result matches the expected value.'
+                    } else {
+                        echo 'The result does not match the expected value.'
+                        error 'Exiting due to mismatch.'
+                    }
+                }
+            }
+        }
+    }
+}
+
+
